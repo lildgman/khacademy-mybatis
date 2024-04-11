@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- namespace: 해당 mapper 파일의 고유한 별칭 -->
+<mapper namespace="memberMapper">
+
+  <!-- 
+    *DML문일 경우
+    <insert|update|delete id="식별자" [parameterType="전달받을 자바타입"]>
+   
+  	*SELECT문일 경우
+  	<select id="각 sql문의 식별자" [parameterType="전달받을 자바타입"] resultType="결과타입" | resultMap="결과객체">
+  	
+  	</select>
+   -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER
+		(
+			USER_NO,
+			USER_ID,
+			USER_PWD,
+			USER_NAME,
+			EMAIL,
+			BIRTHDAY,
+			GENDER,
+			PHONE,
+			ADDRESS
+		)
+		VALUES(
+			SEQ_UNO.NEXTVAL,
+			#{userId},
+			#{userPwd},
+			#{userName},
+			#{email},
+			#{birthday},
+			#{gender},
+			#{phone},
+			#{address}
+		)
+	</insert>
+  
+  
+  
+</mapper>
