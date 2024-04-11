@@ -5,6 +5,22 @@
   
 <!-- namespace: 해당 mapper 파일의 고유한 별칭 -->
 <mapper namespace="memberMapper">
+	<resultMap id="memberResultSet" type="Member">
+	
+		<!-- <result column="테이블 컬럼명" property="객체의 필드명"/>  -->
+		<result column="user_no" property="userNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_pwd" property="userPwd"/>
+		<result column="user_name" property="userName"/>
+		<result column="email" property="email"/>
+		<result column="birthday" property="birthday"/>
+		<result column="gender" property="gender"/>
+		<result column="phone" property="phone"/>
+		<result column="address" property="address"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="modify_date" property="modifyDate"/>
+		<result column="status" property="status"/>
+	</resultMap>
 
   <!-- 
     *DML문일 경우
@@ -40,6 +56,25 @@
 			#{address}
 		)
 	</insert>
+	
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT USER_NO,
+				USER_ID,
+				USER_PWD,
+				USER_NAME,
+				EMAIL,
+				BIRTHDAY,
+				GENDER,
+				PHONE,
+				ADDRESS,
+				ENROLL_DATE,
+				MODIFY_DATE,
+				STATUS
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+			AND USER_PWD = #{userPwd}
+			AND STATUS = 'Y'
+	</select>
   
   
   

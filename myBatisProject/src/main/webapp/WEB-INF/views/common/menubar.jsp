@@ -49,8 +49,9 @@
     
     	<c:choose>
     		<c:when test="${empty loginUser }">
+    		
 		        <!-- 로그인전 -->
-		        <form action="" method="post">
+		        <form action="login.me" method="post">
 	            <table>
 	                <tr>
 	                    <td>아이디</td>
@@ -69,7 +70,7 @@
 	                    </td>
 	                </tr>
 	            </table>
-	        </form>
+	       		</form>
 	
 			</c:when>
 			<c:otherwise>
@@ -78,7 +79,7 @@
 	            <table>
 	                <tr>
 	                    <td colspan="2">
-	                        <h3>xxx님 환영합니다. </h3>
+	                        <h3>${loginUser.userName }님 환영합니다. </h3>
 	                    </td>
 	                    <td></td>
 	                </tr>
@@ -96,7 +97,7 @@
     <div class="nav-area" align="center">
         <div class="menu">HOME</div>
         <div class="menu">공지사항</div>
-        <div class="menu">게시판</div>
+        <div class="menu"><a onclick="location.href='list.bo?cpage=1'">게시판</a></div>
         <div class="menu">ETC</div>
     </div>
 </body>

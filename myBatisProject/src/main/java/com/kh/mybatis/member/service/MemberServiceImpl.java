@@ -26,4 +26,15 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public Member loginMember(Member member) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Member loginUser = memberDao.loginMember(sqlSession, member);
+		
+		sqlSession.close();
+		return loginUser;
+		
+	}
+
 }
