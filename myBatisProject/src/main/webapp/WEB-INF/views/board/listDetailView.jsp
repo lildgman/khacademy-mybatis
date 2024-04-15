@@ -3,12 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
-
 <body>
 
     <jsp:include page="../common/menubar.jsp" />
@@ -21,27 +19,29 @@
         <table align="center" border="1">
             <tr>
                 <td width="100">글번호</td>
-                <td width="500">${b.boardNo }</td>
+                <td width="500">12</td>
             </tr>
             <tr>
                 <td>제목</td>
-                <td>${b.boardTitle }</td>
+                <td>안녕하세요</td>
             </tr>
             <tr>
                 <td>작성자</td>
-                <td>${b.boardWriter }</td>
+                <td>user01</td>
             </tr>
             <tr>
                 <td>조회수</td>
-                <td>${b.count }</td>
+                <td>20</td>
             </tr>
             <tr>
                 <td>작성일</td>
-                <td>${b.createDate }</td>
+                <td>2023/09/07</td>
             </tr>
             <tr>
                 <td>내용</td>
-                <td height="100">${b.boardContent }</td>
+                <td height="100">
+                    안녕하세요^^ 출석하였습니다
+                </td>
             </tr>
         </table>
 
@@ -54,17 +54,19 @@
                 <th><button>등록</button></th>
             </tr>
             <tr>
-                <td colspan="3"><b>댓글(${list.size() })</b></td> <!-- fn:length(list) -->
+                <td colspan="3"><b>댓글(2)</b></td>
             </tr>
-            <c:forEach var="r" items="${list }">
 	            <tr>
-	                <th>${r.replyWriter }</th>
-	                <th>${r.replyContent }</th>
-	                <th>${r.createDate }</th>
+	                <th>user01</th>
+	                <th>오호 굳</th>
+	                <th>24/04/02</th>
 	            </tr>
-            </c:forEach>
+    		<tr>
+	                <th>user02</th>
+	                <th>오호 굳222</th>
+	                <th>24/04/02</th>
+	            </tr>
         </table>
     </div>
 </body>
-
 </html>

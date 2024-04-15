@@ -71,7 +71,6 @@
 	                </tr>
 	            </table>
 	       		</form>
-	
 			</c:when>
 			<c:otherwise>
 	        <!-- 로그인후 -->

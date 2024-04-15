@@ -18,6 +18,10 @@
             color: white;
             text-decoration: none;
         }
+
+        #search-area{
+            margin-bottom: 24px;
+        }
     </style>
 </head>
 
@@ -28,6 +32,27 @@
         <br>
         <h1 align="center">게시판</h1>
         <br>
+
+        <div id="search-area">
+            <form action="search.bo" method="get">
+                <input type="hidden" name="cpage" value="1">
+                <select name="condition">
+                    <option value="writer">작성자</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                </select>
+                <input type="text" name="keyword" value="${keyword }">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+        <c:if test="${not empty condition }">
+        	<script>
+        		window.onload = function() {
+        			const opt = document.querySelector("#search-area option[value=${condition}]");
+            		opt.setAttribute("selected",true);
+        		}
+        	</script>
+        </c:if>
 
         <table id="list-area">
             <thead>
@@ -43,7 +68,7 @@
             	<c:forEach var="b" items="${list }"> 
 	                <tr>
 	                    <td>${b.boardNo }</td>
-	                    <td>${b.boardTitle }</td>
+	                    <td><a href="detail.bo?bno=${b.boardNo}">${b.boardTitle }</td>
 	                    <td>${b.boardWriter }</td>
 	                    <td>${b.count }</td>
 	                    <td>${b.createDate }</td>
@@ -53,10 +78,21 @@
         </table>
         <br><br>
        <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+       
         <div class="paging-area" align="center">
-        	<c:if test="${pi.currentPage ne 1 }">
-        		<button onclick="location.href='${contextPath}/list.bo?cpage=${pi.currentPage -1}'">&lt;</button>
-        	</c:if>
+        	<c:choose>
+        		<c:when test="${empty condition }">
+        			<c:if test="${pi.currentPage ne 1 }">
+        				<button onclick="location.href='${contextPath}/list.bo?cpage=${pi.currentPage -1}'">&lt;</button>
+        			</c:if>
+        		</c:when>
+        		<c:otherwise>
+        			<c:if test="${pi.currentPage ne 1 }">
+        				<button onclick="location.href='${contextPath}/search.bo?cpage=${pi.currentPage -1}&condition=${condition }&keyword=${keyword }'">&lt;</button>
+        			</c:if>
+        		</c:otherwise>
+        	</c:choose>
+        	
         	
         	<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
         		<c:choose>
@@ -64,15 +100,33 @@
         				<button disabled>${p }</button>
         			</c:when>
         			<c:otherwise>
-        				<button onclick="location.href='${contextPath}/list.bo?cpage=${p}'">${p } </button>
+        				<c:choose>
+	        				<c:when test="${empty condition }">
+	        					<button onclick="location.href='${contextPath}/list.bo?cpage=${p}'">${p } </button>
+	        				</c:when>
+	        				<c:otherwise>
+	        					<button onclick="location.href='${contextPath}/search.bo?cpage=${p}&condition=${condition }&keyword=${keyword }'">${p } </button>
+	        				</c:otherwise>
+        				</c:choose>
         			</c:otherwise>
         		</c:choose>
         	</c:forEach>
         	
-        	<c:if test="${pi.currentPage ne pi.maxPage }">
-        		<button onclick="location.href='${contextPath}/list.bo?cpage=${pi.currentPage +1}'">&gt;</button>
-        	</c:if>
+        	<c:choose>
+        		<c:when test="${empty condition }">
+        			<c:if test="${pi.currentPage ne pi.maxPage }">
+        				<button onclick="location.href='${contextPath}/list.bo?cpage=${pi.currentPage +1}'">&gt;</button>
+        			</c:if>
+        		</c:when>
+        		<c:otherwise>
+        			<c:if test="${pi.currentPage ne pi.maxPage }">
+        				<button onclick="location.href='${contextPath}/search.bo?cpage=${pi.currentPage +1}&condition=${condition }&keyword=${keyword }'">&gt;</button>
+        			</c:if>
+        		</c:otherwise>
+        	</c:choose>
+        	
         </div>
+        <br><br>
     </div>
 </body>
 

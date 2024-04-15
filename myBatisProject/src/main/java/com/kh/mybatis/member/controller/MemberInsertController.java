@@ -43,6 +43,7 @@ public class MemberInsertController extends HttpServlet {
 		String address = request.getParameter("address");
 		
 		Member member = new Member(userId, userPwd, userName, email, birthday, gender, phone, address);
+		System.out.println(member);
 		
 		int result = new MemberServiceImpl().insertMember(member);
 		
