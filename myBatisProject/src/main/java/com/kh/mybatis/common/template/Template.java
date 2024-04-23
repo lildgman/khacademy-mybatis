@@ -23,7 +23,7 @@ public class Template {
 		InputStream inputStream;
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
-//			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//			SqlSessionFactory sqlSession = new SqlSessionFactoryBuilder().build(inputStream);
 //			sqlSession = sqlSessionFactory.openSession(false); // boolean autoCommit => 자동커밋여부(true면 자동커밋 false면 수동커밋)
 			
 			sqlSession = new SqlSessionFactoryBuilder().build(inputStream).openSession(false);
