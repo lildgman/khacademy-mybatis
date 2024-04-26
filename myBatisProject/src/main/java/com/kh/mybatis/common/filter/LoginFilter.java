@@ -36,18 +36,16 @@ public class LoginFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
 		HttpServletRequest httpRequest =(HttpServletRequest)request;
 		HttpServletResponse httpResponse = (HttpServletResponse)response;
 		
 		
 		if(httpRequest.getSession().getAttribute("loginUser") == null) {
-			httpResponse.sendRedirect(httpRequest.getContextPath());
+			httpRequest.setAttribute("errorMsg", "먼저 로그인을 해주세요.");
+			httpRequest.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(httpRequest, httpResponse);
 		} else {
 			chain.doFilter(request, response);
 		}
-		// pass the request along the filter chain
 		
 	}
 
